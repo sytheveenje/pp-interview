@@ -1,5 +1,6 @@
 <?php
 
+pest()->group('api');
 
 it('has a valid calculate route', function () {
     $response = $this->post('api/calculate');
