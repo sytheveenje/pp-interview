@@ -30,10 +30,10 @@ class CalculatorController extends Controller
      * @throws IncorrectBracketsException
      * @throws UnknownVariableException
      */
-    public function __invoke(Request $request, $input = null): JsonResponse
+    public function __invoke(Request $request): JsonResponse
     {
         // Get the input from the request
-        //        $input = 'sqrt(((((9*9)/12)+(13-4))*2)^2)';
+        $input = $request->input('input');
 
         if(!$input){
             return response()->json(['error' => 'Input is required'], 400);
