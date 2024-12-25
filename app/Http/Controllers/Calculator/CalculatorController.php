@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Calculator;
 
+use App\Contracts\CalculatorInterface;
 use App\Http\Controllers\Controller;
 use Illuminate\Http\JsonResponse;
 use Illuminate\Http\Request;
@@ -12,6 +13,17 @@ use NXP\Exception\UnknownVariableException;
 use NXP\MathExecutor;
 class CalculatorController extends Controller
 {
+
+    protected CalculatorInterface $calculator;
+
+    /**
+     * @param CalculatorInterface $calculator
+     */
+    public function __construct(CalculatorInterface $calculator)
+    {
+        $this->calculator = $calculator;
+    }
+
     /**
      * @throws IncorrectExpressionException
      * @throws UnknownOperatorException
@@ -21,11 +33,14 @@ class CalculatorController extends Controller
     public function __invoke(Request $request, $input = null): JsonResponse
     {
         // Get the input from the request
-        $input = 'sqrt(((((9*9)/12)+(13-4))*2)^2)';
+        //        $input = 'sqrt(((((9*9)/12)+(13-4))*2)^2)';
+
+        if(!$input){
+            return response()->json(['error' => 'Input is required'], 400);
+        }
 
         // Perform the calculation
-        $executor = new MathExecutor();
-        $result = $executor->execute($input);
+        $result = $this->calculator->calculate($input);
 
         // Return the result
         return response()->json(['input' => $input, 'result' => $result], 200);
