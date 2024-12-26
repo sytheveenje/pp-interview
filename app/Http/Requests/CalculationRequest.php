@@ -2,6 +2,7 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\CalculatorError;
 use Illuminate\Foundation\Http\FormRequest;
 
 class CalculationRequest extends FormRequest
@@ -13,8 +14,16 @@ class CalculationRequest extends FormRequest
                 'required',
                 'string',
                 'max:255',
-                'regex:/^(\d+|\+|\-|\*|\/|\^|\(|\)|,|\.|abs|acos|acosh|arccos|arccosec|arccot|arccotan|arccsc|arcctg|arcsec|arcsin|arctan|arctg|array|asin|atan|atan2|atanh|atn|avg|bindec|ceil|cos|cosec|cosh|cot|cotan|cotg|csc|ctg|ctn|decbin|dechex|decoct|deg2rad|exp|expm1|floor|fmod|hexdec|hypot|if|intdiv|lg|ln|log|log10|log1p|max|median|min|octdec|pi|pow|rad2deg|round|sec|sin|sinh|sqrt|tan|tanh|tg|tn|\s)+$/i'
             ],
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'input.required' => CalculatorError::INPUT_REQUIRED->value,
+            'input.string' => CalculatorError::INPUT_STRING->value,
+            'input.max' => CalculatorError::INPUT_MAX->value,
         ];
     }
 

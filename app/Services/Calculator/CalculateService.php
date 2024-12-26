@@ -3,6 +3,7 @@
 namespace App\Services\Calculator;
 
 use App\Contracts\CalculatorInterface;
+use App\Enums\CalculatorError;
 use NXP\Exception\IncorrectExpressionException;
 use NXP\Exception\UnknownOperatorException;
 use NXP\Exception\IncorrectBracketsException;
@@ -29,14 +30,7 @@ class CalculateService implements CalculatorInterface
         try {
             return $this->calculator->execute($expression);
         } catch (\Exception $e) {
-            $exceptionMessages = [
-                IncorrectExpressionException::class => 'Incorrect expression',
-                UnknownOperatorException::class => 'Unknown operator',
-                IncorrectBracketsException::class => 'Incorrect brackets',
-                UnknownVariableException::class => 'Unknown variable',
-            ];
-
-            return new \Exception($exceptionMessages[$e::class] ?? 'An unknown error occurred');
+            return new \Exception(CalculatorError::fromException($e)->value);
         }
     }
 }
