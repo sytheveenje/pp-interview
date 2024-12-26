@@ -4,16 +4,11 @@ namespace App\Http\Controllers\Calculator;
 
 use App\Contracts\CalculatorInterface;
 use App\Http\Controllers\Controller;
+use App\Http\Requests\CalculationRequest;
 use Illuminate\Http\JsonResponse;
-use Illuminate\Http\Request;
-use NXP\Exception\IncorrectBracketsException;
-use NXP\Exception\IncorrectExpressionException;
-use NXP\Exception\UnknownOperatorException;
-use NXP\Exception\UnknownVariableException;
-use NXP\MathExecutor;
+
 class CalculatorController extends Controller
 {
-
     protected CalculatorInterface $calculator;
 
     /**
@@ -25,24 +20,31 @@ class CalculatorController extends Controller
     }
 
     /**
-     * @throws IncorrectExpressionException
-     * @throws UnknownOperatorException
-     * @throws IncorrectBracketsException
-     * @throws UnknownVariableException
+     * Handle calculation requests.
+     *
+     * @param CalculationRequest $request
+     * @return JsonResponse
      */
-    public function __invoke(Request $request): JsonResponse
+    public function __invoke(CalculationRequest $request): JsonResponse
     {
-        // Get the input from the request
         $input = $request->input('input');
 
-        if(!$input){
-            return response()->json(['error' => 'Input is required'], 400);
+        if (!$input) {
+            return response()->json(['error' => 'Input is required'], 302);
         }
 
-        // Perform the calculation
         $result = $this->calculator->calculate($input);
 
-        // Return the result
-        return response()->json(['input' => $input, 'result' => $result], 200);
+        if ($result instanceof \Exception) {
+            return response()->json([
+                'input' => $input,
+                'error' => $result->getMessage()
+            ], 302);
+        }
+
+        return response()->json([
+            'input' => $input,
+            'result' => $result
+        ], 200);
     }
 }
