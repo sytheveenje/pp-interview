@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Calculator;
 
+use App\Actions\Calculations\StoreCalculation;
 use App\Contracts\CalculatorInterface;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CalculationRequest;
@@ -41,6 +42,8 @@ class CalculatorController extends Controller
                 'error' => $result->getMessage()
             ], 302);
         }
+
+        StoreCalculation::run($input, $result);
 
         return response()->json([
             'input' => $input,
