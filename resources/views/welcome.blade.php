@@ -20,8 +20,6 @@
         @endif
     </head>
     <body id="app" class="">
-        Hello world!
-
         <calculator></calculator>
     </body>
 </html>
