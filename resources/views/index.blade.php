@@ -20,7 +20,6 @@
         @endif
     </head>
     <body id="app" class="">
-        <calculator></calculator>
-        <calculator-history></calculator-history>
+        <calculator-page></calculator-page>
     </body>
 </html>

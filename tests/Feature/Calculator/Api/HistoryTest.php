@@ -6,13 +6,13 @@ use Carbon\Carbon;
 pest()->group('history');
 
 it('has a valid api route to get the history', function () {
-    $response = $this->get('/api/history');
+    $response = $this->get('/api/calculations');
 
     $response->assertStatus(200);
 });
 
 it('returns an empty array if no history is available', function () {
-    $response = $this->get('/api/history');
+    $response = $this->get('/api/calculations');
 
     $response->assertStatus(200);
     $response->assertJson([]);
@@ -25,7 +25,7 @@ it('returns the history of calculations', function () {
         'created_at' => '2024-01-01 12:00:00',
     ]);
 
-    $response = $this->get('/api/history');
+    $response = $this->get('/api/calculations');
 
     $response->assertStatus(200);
     $response->assertJson([
@@ -57,7 +57,7 @@ it('returns the history of calculations grouped by date', function () {
         'created_at' => '2024-01-02 12:00:00',
     ]);
 
-    $response = $this->get('/api/history');
+    $response = $this->get('/api/calculations');
 
     $response->assertStatus(200);
     $response->assertJson([

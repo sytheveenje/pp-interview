@@ -1,10 +1,7 @@
 import './bootstrap';
 
 import { createApp } from 'vue';
-import Calculator from "./components/Calculator.vue";
-import CalculatorHistory from "./components/CalculatorHistory.vue";
+import CalculatorPage from "./pages/CalculatorPage.vue";
 
-createApp({})
-    .component('Calculator', Calculator)
-    .component('CalculatorHistory', CalculatorHistory)
+createApp(CalculatorPage)
     .mount('#app');

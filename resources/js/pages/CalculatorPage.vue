@@ -1,11 +1,22 @@
-<script>
-export default {
-name: "CalculatorPage"
-}
+<script setup>
+import { onMounted } from 'vue'
+import Calculator from '../components/Calculator.vue'
+import CalculatorHistory from '../components/CalculatorHistory.vue'
+import { useCalculator } from "../composables/useCalculator.js";
+
+const { showHistory, calculations, getCalculations } = useCalculator()
+
+onMounted(() => {
+  getCalculations()
+})
+
 </script>
 
 <template>
-  $END$
+  <div>
+    <Calculator />
+    <CalculatorHistory v-show="showHistory" :calculations="calculations" />
+  </div>
 </template>
 
 <style scoped>

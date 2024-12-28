@@ -22,9 +22,15 @@ class CalculatorController extends Controller
         $this->calculator = $calculator;
     }
 
-    public function history(Request $request): JsonResponse
+    /**
+     * Get calculation history
+     *
+     * @param Request $request
+     * @return JsonResponse
+     */
+    public function show(Request $request): JsonResponse
     {
-        $history = Calculation::query()
+        $calculations = Calculation::query()
             ->select('id', 'input', 'result', 'created_at')
             ->orderBy('created_at', 'desc')
             ->get()
@@ -45,16 +51,16 @@ class CalculatorController extends Controller
                 ];
             })->values();
 
-        return response()->json($history, 200);
+        return response()->json($calculations, 200);
     }
 
     /**
-     * Handle calculation requests.
+     * Store calculation in database and return result
      *
      * @param CalculationRequest $request
      * @return JsonResponse
      */
-    public function calculate(CalculationRequest $request): JsonResponse
+    public function store(CalculationRequest $request): JsonResponse
     {
         $input = $request->input('input');
 
