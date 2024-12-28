@@ -8,10 +8,14 @@ use NXP\Exception\IncorrectExpressionException;
 use NXP\Exception\UnknownOperatorException;
 use NXP\Exception\IncorrectBracketsException;
 use NXP\Exception\UnknownVariableException;
+use NXP\MathExecutor;
 
 class CalculateService implements CalculatorInterface
 {
-    private $calculator;
+    /**
+     * @var MathExecutor
+     */
+    protected MathExecutor $calculator;
 
     /**
      * @param $calculator

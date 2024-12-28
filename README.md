@@ -18,47 +18,19 @@ sqrt((((9*9)/12)+(13-4))*2)^2)
 
 ## Installation
 1. Clone the repository
-2. Run `composer install`
-3. Run `npm install`
-4. Run `npm run dev`
-5. Run `php artisan serve`
-6. Visit `http://localhost:8000`
+2. Copy the `.env.example` file to `.env`
+3. Set the database credentials in the `.env` file
+4. Make sure to have a sqlite database file in the `database` folder
+  4.1 Run `touch database/database.sqlite`
+  4.2 Run `touch database/testingdatabase.sqlite`'
+  4.3 Run `php artisan migrate`
+5. Run `composer install`
+6. Run `npm install`
+7. Run `npm run dev`
+8. Run `php artisan serve`
+9. Visit `http://localhost:8000`
 
-## Thought Process
-2024-12-24
-- I will need some sort of class that takes in a string and parses it into smaller calculations, although this is not necessary for the MVP, it is for the stretch goal and I think it's easier to already account for it.
-- I will need a class that can take in a calculation and return the result (addition, subtraction, multiplication, division, sqrt and power)
-- I will need a controller that handles the api request
-- I will need something that validates the input
-- I will need a way to store the calculations
-- I will need a vue component that can take in a calculation and display the result
-- I will need a vue component that can display the history of calculations, with the ability to delete a single calculation or clear all calculations
-- I will need a way to communicate between the vue components and the api
-- I will need a way to display errors
-
-2024-12-25
-- The client wants complex calculations, I have to choose between writing a parser or finding a package
-  - I've chosen for a package, because it's faster and more robust
-  - I will add a service that takes in a string and returns the result
-  - The service will use the package to parse the string
-  - That way we can easily write our own parser if we want to
-
-2024-12-26
-- I've created a service
-- I refactored the tests to use enums
-- I've used Laravel Actions to store the calculations in the database
-
-2024-12-27
-- I created a Vue component that can take in a calculation and display the result
-  - This works, but it needs some more work to make the experience better
-  - I need a good way to clear the input, also pasting in a calculation doesn't work
-  - Errors need a better way to be displayed
-- I will create a Vue component that can display the history of calculations
-
-2024-12-28
-- I need to create a Vue page, that holds the calculator and the history
-- When a calculation is made, it should be stored in the database
-- When a calculation is done, it should update the history
-- I need to create a way to delete a single calculation
-- I need to create a way to clear all calculations
-- The calculator component is one big file, I need to refactor it into smaller components or at least split it up
+## Testing
+- The User Model is not tested, as it is a default Laravel model. The rest has coverage.
+- Run `php artisan db:seed --class=CalculationSeeder` to seed the database with some calculations.
+- Run `php artisan test` to run the tests.

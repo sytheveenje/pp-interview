@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Calculator;
 
+use App\Actions\Calculations\GetCalculationsFromDatabase;
 use App\Actions\Calculations\StoreCalculation;
 use App\Contracts\CalculatorInterface;
 use App\Http\Controllers\Controller;
@@ -23,33 +24,15 @@ class CalculatorController extends Controller
     }
 
     /**
-     * Get calculation history
+     * Get calculations from database
+     * used for showing history
      *
      * @param Request $request
      * @return JsonResponse
      */
     public function show(Request $request): JsonResponse
     {
-        $calculations = Calculation::query()
-            ->select('id', 'input', 'result', 'created_at')
-            ->orderBy('created_at', 'desc')
-            ->get()
-            ->groupBy(function ($item) {
-                return $item->created_at->format('Y-m-d');
-            })
-            ->map(function ($items, $date) {
-                return [
-                    'date' => $date,
-                    'calculations' => $items->map(function ($item) {
-                        return [
-                            'id' => $item->id,
-                            'input' => $item->input,
-                            'result' => $item->result,
-                            'created_at' => $item->created_at,
-                        ];
-                    })->values(),
-                ];
-            })->values();
+        $calculations = GetCalculationsFromDatabase::run();
 
         return response()->json($calculations, 200);
     }

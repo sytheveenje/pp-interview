@@ -20,6 +20,7 @@ enum CalculatorError: string
 
     /**
      * Map an exception to a CalculatorError enum value.
+     * Used to convert exceptions to error messages.
      *
      * @param \Exception $e
      * @return self

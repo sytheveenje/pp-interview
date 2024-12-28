@@ -7,6 +7,9 @@ use Illuminate\Foundation\Http\FormRequest;
 
 class CalculationRequest extends FormRequest
 {
+    /**
+     * @return array[]
+     */
     public function rules(): array
     {
         return [
@@ -18,7 +21,10 @@ class CalculationRequest extends FormRequest
         ];
     }
 
-    public function messages()
+    /**
+     * @return array
+     */
+    public function messages(): array
     {
         return [
             'input.required' => CalculatorError::INPUT_REQUIRED->value,
@@ -27,6 +33,9 @@ class CalculationRequest extends FormRequest
         ];
     }
 
+    /**
+     * @return bool
+     */
     public function authorize(): bool
     {
         return true;

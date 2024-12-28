@@ -15,9 +15,20 @@ class CalculationFactory extends Factory
 
     public function definition(): array
     {
+        // Generate a random mathematical expression
+        $operators = ['+', '-', '*', '/'];
+        $num1 = $this->faker->numberBetween(1, 100);
+        $num2 = $this->faker->numberBetween(1, 100);
+        $operator = $this->faker->randomElement($operators);
+
+        $expression = "$num1 $operator $num2";
+
+        // Safely evaluate the result
+        $result = eval("return $expression;");
+
         return [
-            'input' => '1+1',
-            'result' => 2,
+            'input' => $expression,
+            'result' => $result,
             'created_at' => Carbon::now(),
             'updated_at' => Carbon::now(),
         ];
