@@ -37,6 +37,10 @@ sqrt((((9*9)/12)+(13-4))*2)^2)
 9. Visit `http://localhost:8000`
 
 ## Testing
+
+<img width="844" alt="Scherm­afbeelding 2024-12-28 om 16 09 18" src="https://github.com/user-attachments/assets/43735375-02b5-48b9-b832-e30e0ad999e5" />
+
+
 - The User Model is not tested, as it is a default Laravel model. The rest has coverage.
 - Run `php artisan db:seed --class=CalculationSeeder` to seed the database with some calculations.
 - Run `php artisan test` to run the tests.
