@@ -29,12 +29,15 @@ it('returns the history of calculations', function () {
 
     $response->assertStatus(200);
     $response->assertJson([
-        '2024-01-01' => [
-            [
-                'id' => 1,
-                'input' => '2+2',
-                'result' => 4,
-                'created_at' => '2024-01-01T12:00:00.000000Z',
+        [
+            'date' => '2024-01-01',
+            'calculations' => [
+                [
+                    'id' => 1,
+                    'input' => '2+2',
+                    'result' => 4,
+                    'created_at' => '2024-01-01T12:00:00.000000Z',
+                ],
             ],
         ],
     ]);
@@ -58,20 +61,26 @@ it('returns the history of calculations grouped by date', function () {
 
     $response->assertStatus(200);
     $response->assertJson([
-        '2024-01-02' => [
-            [
-                'id' => 2,
-                'input' => '4+4',
-                'result' => 8,
-                'created_at' => '2024-01-02T12:00:00.000000Z',
+        [
+            'date' => '2024-01-02',
+            'calculations' => [
+                [
+                    'id' => 2,
+                    'input' => '4+4',
+                    'result' => 8,
+                    'created_at' => '2024-01-02T12:00:00.000000Z',
+                ],
             ],
         ],
-        '2024-01-01' => [
-            [
-                'id' => 1,
-                'input' => '2+2',
-                'result' => 4,
-                'created_at' => '2024-01-01T12:00:00.000000Z',
+        [
+            'date' => '2024-01-01',
+            'calculations' => [
+                [
+                    'id' => 1,
+                    'input' => '2+2',
+                    'result' => 4,
+                    'created_at' => '2024-01-01T12:00:00.000000Z',
+                ],
             ],
         ],
     ]);

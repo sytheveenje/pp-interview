@@ -15,11 +15,16 @@ export default {
 </script>
 
 <template>
-  <div>
+  <div class="font-mono">
     <h2>History</h2>
     <ul>
-      <li v-for="entry in history" :key="entry.id">
-        {{ entry.input }} = {{ entry.result }}
+      <li v-for="days in history" :key="days">
+        <h3 class="text-xl font-bold py-3">{{ days.date }}</h3>
+        <ul class="mb-5">
+          <li v-for="calculation in days.calculations" :key="calculation">
+            <p>{{ calculation.input }} = {{ calculation.result }}</p>
+          </li>
+        </ul>
       </li>
     </ul>
   </div>
