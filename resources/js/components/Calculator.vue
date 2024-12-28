@@ -1,7 +1,7 @@
 <script setup>
 import { useCalculator } from '../composables/useCalculator.js'
 
-const { input, result, toggleHistory, buttons, handleButtonClick, calculate } = useCalculator()
+const { input, result, toggleHistory, buttons, handleButtonClick } = useCalculator()
 </script>
 
 <template>
@@ -24,17 +24,27 @@ const { input, result, toggleHistory, buttons, handleButtonClick, calculate } = 
       />
     </div>
     <div class="grid grid-cols-4 gap-2 mb-4">
-      <button
-          v-for="button in buttons"
-          :key="button.label"
-          @click="handleButtonClick(button.value)"
-          :class="[
-            button.bgcolor || 'bg-gray-700 hover:bg-gray-500',
-            'text-white font-bold py-2 rounded'
-          ]"
-      >
-        {{ button.label }}
-      </button>
+      <div v-for="button in buttons"
+           :key="button.label"
+           class="group relative">
+        <button
+            @click="handleButtonClick(button.value)"
+            :class="[
+              button.bgcolor || 'bg-gray-700 hover:bg-gray-500',
+              'text-white font-bold py-2 rounded w-full'
+            ]"
+            :aria-label="`Button for ${button.label}`"
+        >
+          {{ button.label }}
+        </button>
+        <span
+            v-if="button.shortcut"
+            class="absolute text-xs text-gray-300 bg-gray-800 px-1 py-0.5 rounded hidden group-hover:block top-[-1.5rem] right-0"
+        >
+          Shortcut: {{ button.shortcut }}
+        </span>
+      </div>
+
     </div>
     <button
         @click="toggleHistory"

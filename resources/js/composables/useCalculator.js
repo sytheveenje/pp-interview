@@ -1,15 +1,17 @@
 import { ref, onMounted, onUnmounted } from 'vue'
+import { useHistory } from '../composables/useHistory'
 import axios from 'axios'
+
+const { getCalculations } = useHistory()
 
 const input = ref('')
 const result = ref('')
 const showHistory = ref(false)
-const calculations = ref([])
 
 const buttons = [
     { label: 'cos', value: 'cos', shortcut: 'c', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
     { label: 'sin', value: 'sin', shortcut: 's', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
-    { label: 'sqrt', value: 'sqrt', shortcut: '', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
+    { label: 'sqrt', value: 'sqrt', shortcut: 'q', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
     { label: 'pow', value: '^', shortcut: '^', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
     { label: '(', value: '(', shortcut: '(', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
     { label: ')', value: ')', shortcut: ')', bgcolor: 'bg-gray-500 hover:bg-gray-400'},
@@ -38,8 +40,10 @@ async function calculate() {
         const response = await axios.post('/api/calculate', { input: input.value })
         result.value = response.data.result
         input.value = ''
+        await getCalculations()
     } catch (error) {
         result.value = error.response?.data?.error || 'An unexpected error occurred'
+        input.value = ''
     }
 }
 
@@ -72,38 +76,6 @@ const toggleHistory = () => {
     showHistory.value = !showHistory.value
 }
 
-async function getCalculations() {
-    try {
-        const response = await axios.get('/api/calculations')
-        console.log('API Response:', response.data) // Debug here
-        calculations.value = response.data
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-const copyCalculationInput = (calculation) => {
-    input.value = calculation.input
-}
-
-async function deleteCalculation(id) {
-    try {
-        await axios.delete(`/api/calculations/${id}`)
-        getCalculations()
-    } catch (error) {
-        console.error(error)
-    }
-}
-
-async function destroyCalculations() {
-    try {
-        await axios.delete('/api/calculations')
-        getCalculations()
-    } catch (error) {
-        console.error(error)
-    }
-}
-
 function setupEventListeners() {
 
     onMounted(() => {
@@ -122,14 +94,9 @@ export const useCalculator = () => {
         input,
         result,
         showHistory,
-        calculations,
         buttons,
         calculate,
         handleButtonClick,
         toggleHistory,
-        getCalculations,
-        copyCalculationInput,
-        deleteCalculation,
-        destroyCalculations,
     }
 }

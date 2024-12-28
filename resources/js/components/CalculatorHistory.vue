@@ -1,7 +1,8 @@
 <script setup>
 import {useCalculator} from "../composables/useCalculator.js";
+import {useHistory} from "../composables/useHistory.js";
 
-const {calculations, destroyCalculations, copyCalculationInput, deleteCalculation} = useCalculator()
+const {calculations, destroyCalculations, copyCalculationInput, deleteCalculation} = useHistory()
 
 defineProps({
   calculations: {
