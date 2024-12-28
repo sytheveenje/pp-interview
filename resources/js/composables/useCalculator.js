@@ -65,6 +65,10 @@ const handleButtonClick = (value) => {
 }
 
 const handleKeydown = (event) => {
+    if(event.key === 'h') {
+        toggleHistory()
+        event.preventDefault()
+    }
     const button = buttons.find(b => b.shortcut === event.key)
     if (button) {
         handleButtonClick(button.value)

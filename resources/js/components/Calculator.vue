@@ -11,7 +11,7 @@ const { input, result, toggleHistory, buttons, handleButtonClick } = useCalculat
           v-if="result"
           :value="result"
           type="text"
-          class="text-black text-xl p-2 rounded w-full"
+          class="text-gray-200 bg-gray-800 text-xl p-2 rounded w-full"
           placeholder="Enter calculation"
           readonly
       />
@@ -19,7 +19,7 @@ const { input, result, toggleHistory, buttons, handleButtonClick } = useCalculat
           v-else
           v-model="input"
           type="text"
-          class="text-black text-xl p-2 rounded w-full"
+          class="text-gray-200 bg-gray-800 text-xl p-2 rounded w-full"
           placeholder="Enter calculation"
       />
     </div>
@@ -46,11 +46,18 @@ const { input, result, toggleHistory, buttons, handleButtonClick } = useCalculat
       </div>
 
     </div>
-    <button
-        @click="toggleHistory"
-        class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded w-full"
-    >
-      Toggle history
-    </button>
+    <div class="group relative">
+      <button
+          @click="toggleHistory"
+          class="bg-black hover:bg-gray-900 text-white font-bold py-2 px-4 rounded w-full"
+          :aria-label="`Button to toggle history`"
+      >
+        Toggle history
+      </button>
+      <span
+          class="absolute text-xs text-gray-300 bg-gray-800 px-1 py-0.5 rounded hidden group-hover:block top-[-1.5rem] right-0">
+        Shortcut: h
+      </span>
+    </div>
   </div>
 </template>

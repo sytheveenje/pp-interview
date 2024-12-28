@@ -15,7 +15,8 @@ onMounted(() => {
 </script>
 
 <template>
-  <div>
+  <div class="font-mono py-10 bg-gray-800 min-h-screen">
+    <h1 class="text-center font-bold text-2xl pb-3 text-white ">Casio Systems <span class="italic text-sm">PPv0.1</span></h1>
     <Calculator />
     <CalculatorHistory v-show="showHistory" :calculations="calculations" />
   </div>

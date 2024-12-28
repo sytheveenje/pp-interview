@@ -16,7 +16,7 @@ defineProps({
   <div class="font-mono max-w-3xl mx-auto rounded-b-lg shadow-lg bg-black text-white p-3">
     <div class="flex py-3 border-b">
       <h2 class="text-xl font-bold">History</h2>
-      <button @click="destroyCalculations()" class="ml-auto">Clear history</button>
+      <button @click="destroyCalculations()" class="ml-auto" :aria-label="`Clear history`">Clear history</button>
     </div>
     <ul>
       <li v-if="calculations.length === 0" class="text-center my-5">No calculations yet</li>
@@ -30,7 +30,7 @@ defineProps({
               {{ calculation.input }} = {{ calculation.result }}
             </span>
             <span>
-              <button @click="deleteCalculation(calculation.id)">x</button>
+              <button @click="deleteCalculation(calculation.id)" :aria-label="`Delete this calculation`">x</button>
             </span>
           </li>
         </ul>
