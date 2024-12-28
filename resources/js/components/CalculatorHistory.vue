@@ -1,7 +1,7 @@
 <script setup>
 import {useCalculator} from "../composables/useCalculator.js";
 
-const {calculations, clearHistory, copyCalculationInput, deleteCalculation} = useCalculator()
+const {calculations, destroyCalculations, copyCalculationInput, deleteCalculation} = useCalculator()
 
 defineProps({
   calculations: {

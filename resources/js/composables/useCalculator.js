@@ -95,7 +95,7 @@ async function deleteCalculation(id) {
     }
 }
 
-async function destoryCalculations() {
+async function destroyCalculations() {
     try {
         await axios.delete('/api/calculations')
         getCalculations()
@@ -130,6 +130,6 @@ export const useCalculator = () => {
         getCalculations,
         copyCalculationInput,
         deleteCalculation,
-        destoryCalculations,
+        destroyCalculations,
     }
 }
