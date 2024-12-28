@@ -18,6 +18,7 @@ defineProps({
       <button @click="destroyCalculations()" class="ml-auto">Clear history</button>
     </div>
     <ul>
+      <li v-if="calculations.length === 0" class="text-center my-5">No calculations yet</li>
       <li v-for="days in calculations" :key="days"
           class="grid grid-cols-4 gap-4 my-5">
         <h3 class="text-sm uppercase font-bold">{{ days.date }}</h3>

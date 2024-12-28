@@ -76,4 +76,27 @@ class CalculatorController extends Controller
             'result' => $result
         ], 200);
     }
+
+    /**
+     * Delete a calculation
+     *
+     * @param Calculation $calculation
+     * @return JsonResponse
+     */
+    public function delete(Calculation $calculation): JsonResponse
+    {
+        $calculation->delete();
+
+        return response()->json(['Calculation deleted'], 204);
+    }
+
+    /**
+     * Destroy all calculations
+     */
+    public function destroy(): JsonResponse
+    {
+        Calculation::query()->delete();
+
+        return response()->json(['All calculations deleted'], 204);
+    }
 }
