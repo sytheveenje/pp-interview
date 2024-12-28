@@ -1,5 +1,11 @@
 # Calculator in Laravel and Vue
 
+
+
+https://github.com/user-attachments/assets/529d7228-3a05-41b5-9901-f7e564710a2b
+
+
+
 ## Goal
 ### Requirements
 Build an API that supports four types of calculation operators:
