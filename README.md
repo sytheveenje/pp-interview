@@ -42,4 +42,23 @@ sqrt((((9*9)/12)+(13-4))*2)^2)
   - I will add a service that takes in a string and returns the result
   - The service will use the package to parse the string
   - That way we can easily write our own parser if we want to
-- 
+
+2024-12-26
+- I've created a service
+- I refactored the tests to use enums
+- I've used Laravel Actions to store the calculations in the database
+
+2024-12-27
+- I created a Vue component that can take in a calculation and display the result
+  - This works, but it needs some more work to make the experience better
+  - I need a good way to clear the input, also pasting in a calculation doesn't work
+  - Errors need a better way to be displayed
+- I will create a Vue component that can display the history of calculations
+
+2024-12-28
+- I need to create a Vue page, that holds the calculator and the history
+- When a calculation is made, it should be stored in the database
+- When a calculation is done, it should update the history
+- I need to create a way to delete a single calculation
+- I need to create a way to clear all calculations
+- The calculator component is one big file, I need to refactor it into smaller components or at least split it up

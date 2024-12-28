@@ -21,5 +21,6 @@
     </head>
     <body id="app" class="">
         <calculator></calculator>
+        <calculator-history></calculator-history>
     </body>
 </html>
